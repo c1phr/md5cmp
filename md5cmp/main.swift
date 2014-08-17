@@ -42,7 +42,7 @@ func start()
             {
                 let file = args[2] as String
                 println("Hash of " + file + ":")
-                println(SingleFileHash(file))
+                println(md5cmp.SingleFileHash(file))
             }
         
         case "-c":
@@ -55,7 +55,7 @@ func start()
             {
                 let file1 = args[2] as String
                 let file2 = args[3] as String
-                let result = FileCompare(file1, file2)
+                let result = md5cmp.FileCompare(file1, file2: file2) //Pretty sure there's a compiler bug preventing me from passing in the raw value here
                 if (result.success)
                 {
                     println(result.file1hash + " == " + result.file2hash)
