@@ -64,11 +64,22 @@ func start()
                 }
                 else
                 {
-                    println("WARNING: The files are not equal")
-                    println("File 1: " + result.file1hash)
-                    println("File 2: " + result.file2hash)
+                    if (result.file1hash == "") //Handle the case where the file couldn't be found
+                    {
+                        println("File not found")
+                    }
+                    else
+                    {
+                        println("WARNING: The files are not equal")
+                        println("File 1: " + result.file1hash)
+                        println("File 2: " + result.file2hash)
+                    }
                 }
             }
+        
+        case "-s":
+            println("Not yet implemented!")
+            //Implement string compare mode
         
         default:
             println("Invalid Flag: " + flag)

@@ -12,29 +12,52 @@ class md5cmp
 {
     class func SingleFileHash(fileName: String) -> String
     {
-        return FileHash.md5HashOfFileAtPath(fileName)
+        let fileManager = NSFileManager.defaultManager()
+        if (fileManager.fileExistsAtPath(fileName))
+        {
+            return FileHash.md5HashOfFileAtPath(fileName)
+        }
+        else
+        {
+            return "File not found!"
+        }
     }
     
     class func FileCompare(file1: String, file2: String) -> (success: Bool, file1hash: String, file2hash: String)
     {
-        let file1hash = FileHash.md5HashOfFileAtPath(file1)
-        let file2hash = FileHash.md5HashOfFileAtPath(file2)
-        
-        if (file1hash == file2hash)
+        let fileManager = NSFileManager.defaultManager()
+        if (fileManager.fileExistsAtPath(file1) && fileManager.fileExistsAtPath(file2))
         {
-            return (true, file1hash, file2hash)
+            let file1hash = FileHash.md5HashOfFileAtPath(file1)
+            let file2hash = FileHash.md5HashOfFileAtPath(file2)
+            
+            if (file1hash == file2hash)
+            {
+                return (true, file1hash, file2hash)
+            }
+            return (false, file1hash, file2hash)
         }
-        return (false, file1hash, file2hash)
+        return(false, "", "")
+        
     }
     
     class func StringCompare(fileName: String, inputHash: String) -> (success: Bool, fileHash: String)
     {
-        let fileHash = FileHash.md5HashOfFileAtPath(fileName)
-        
-        if (fileHash == inputHash)
+        let fileManager = NSFileManager.defaultManager()
+        if (fileManager.fileExistsAtPath(fileName))
         {
-            return (true, fileHash)
+            let fileHash = FileHash.md5HashOfFileAtPath(fileName)
+            
+            if (fileHash == inputHash)
+            {
+                return (true, fileHash)
+            }
+            return (false, fileHash)
         }
-        return (false, fileHash)
+        else
+        {
+            return (false, "File not found!")
+        }
+        
     }
 }
