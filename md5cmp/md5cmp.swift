@@ -10,6 +10,7 @@
 import Foundation
 class md5cmp
 {
+    //Return the hash of a single file passed in
     class func SingleFileHash(fileName: String) -> String
     {
         let fileManager = NSFileManager.defaultManager()
@@ -23,6 +24,7 @@ class md5cmp
         }
     }
     
+    //Return a bool representation of a comparison of the md5 hash of two files, in addition to the hashes themselves if they don't match.
     class func FileCompare(file1: String, file2: String) -> (success: Bool, file1hash: String, file2hash: String)
     {
         let fileManager = NSFileManager.defaultManager()
@@ -41,6 +43,7 @@ class md5cmp
         
     }
     
+    //Return a bool representation of a comparison of the md5 hash of a file and string
     class func StringCompare(fileName: String, inputHash: String) -> (success: Bool, fileHash: String)
     {
         let fileManager = NSFileManager.defaultManager()

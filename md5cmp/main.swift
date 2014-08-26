@@ -78,8 +78,28 @@ func start()
             }
         
         case "-s":
-            println("Not yet implemented!")
-            //Implement string compare mode
+            if (args.count != 4)
+            {
+                println("USAGE: md5cmp -s <file> <string>")
+                exit(1)
+            }
+            else
+            {
+                let file = args[2] as String
+                let testString = args[3] as String
+                let result = md5cmp.StringCompare(file, inputHash: testString)
+                
+                if (result.success)
+                {
+                    println("MD5 match successful!")
+                    exit(0)
+                }
+                else
+                {
+                    println("MD5 did not match, ACTUAL: " + result.fileHash + " EXPECTED: " + testString)
+                    exit(1)
+                }
+            }
         
         default:
             println("Invalid Flag: " + flag)
